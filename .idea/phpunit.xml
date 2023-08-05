@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PHPUnit">
+    <option name="directories">
+      <list>
+        <option value="$PROJECT_DIR$/StageBH_Bank/tests/Unit" />
+        <option value="$PROJECT_DIR$/StageBH_Bank/tests/Feature" />
+        <option value="$PROJECT_DIR$/StageBH/tests/Unit" />
+        <option value="$PROJECT_DIR$/StageBH/tests/Feature" />
+        <option value="$PROJECT_DIR$/GestionStagiaires/tests/Unit" />
+        <option value="$PROJECT_DIR$/GestionStagiaires/tests/Feature" />
+      </list>
+    </option>
+  </component>
+</project>
