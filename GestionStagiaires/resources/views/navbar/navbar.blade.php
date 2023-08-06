@@ -4,12 +4,15 @@
 <head>
     <title>Gestion-@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-warning">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Navbar</a>
+          <img src="{{asset('BHlogo.png')}}" alt="logo bh" width="10%" height="1%">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,8 +46,8 @@
                        Affectation
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Affecter</a></li>
-                        <li><a class="dropdown-item" href="#">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{route('affecterPage')}}">Affecter</a></li>
+                        <li><a class="dropdown-item" href="{{route('consulterPage')}}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>

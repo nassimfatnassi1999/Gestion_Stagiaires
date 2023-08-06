@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AffectController;
 use App\Http\Controllers\PersoController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,12 +33,13 @@ Route::middleware([
     })->name('Gestionstag');
     //route PersonnelController
     Route::controller(PersoController::class)->group(function (){
+        //log out
+        Route::get('/logout','logoutn')->name('logoutn');
         //archive
         Route::get('/archive/restore/{id}','restore')->name('restore');
         Route::get('/archive','showSoftdeletes')->name('archive');
         Route::get('/users/forcedelete/{id}','forceDelete')->name('forceDelete');
         Route::get('/users/deleteAll','deleteAll')->name('deleteAll');
-        Route::get('/logout','logoutn')->name('logoutn');
         //stagiare********************************************************************************
         Route::get('/users/createS','createS');
         Route::get('/users/indexS','indexS')->name('stagiaires');
@@ -53,6 +54,11 @@ Route::middleware([
         Route::get('/users/editE/{id}','editE')->name('editEncadrant');
         Route::put('/users/updateE/{id}','updateE')->name('updateEncadrant');
         Route::delete('/users/destroyE/{id}','destroyE')->name('destroyEncadrant');
-
+        //affectation***************************************************************************
+        //route Affectation Controller
+        Route::controller(AffectController::class)->group(function (){
+            Route::get('/gestion/affecter','affecterPage')->name('affecterPage');
+            Route::get('/gestion/consulter','consulterPage')->name('consulterPage');
+        });
     });
 });

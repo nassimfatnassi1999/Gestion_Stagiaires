@@ -7,9 +7,7 @@
     <form action="{{route('updateStagiaire',$user->id)}}" method="POST">
         @csrf
         @method('PUT')
-        <input type="text" name="firstname" value="{{$user->firstname}}">
-        <br> <br>
-        <input type="text" name="lastname" value="{{$user->lastname}}">
+        <input type="text" name="name" value="{{$user->name}}">
         <br> <br>
         <input type="text" name="role" value="{{$user->role}}">
         <br> <br>
@@ -17,8 +15,7 @@
         <br> <br>
         <input type="tel" name="telephone" value="{{$user->telephone}}">
         <br> <br>
-        <input type="text" name="password" >
-
+        <input type="text" name="password" placeholder="enter new password">
         <br> <br>
         <input type="text" name="universite" value="{{$user->universite}}">
         <br> <br>

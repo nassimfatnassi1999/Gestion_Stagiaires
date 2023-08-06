@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('universite')->nullable();
             $table->string('niveau')->nullable();
             $table->string('duree',2)->nullable();
-            $table->string('titre',50);
+            $table->string('titre',50)->nullable();
             $table->string('password');
             $table->softDeletes();
             $table->timestamps();

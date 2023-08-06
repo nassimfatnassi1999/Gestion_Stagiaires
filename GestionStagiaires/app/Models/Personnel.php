@@ -20,4 +20,12 @@ class Personnel extends Model
         'duree',
         'titre',
     ];
+    /*
+     * relation extend
+     */
+    public function encadrant()
+    {
+        return $this->hasMany(Stagiaire::class);
+    }
+
 }
