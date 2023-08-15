@@ -25,10 +25,15 @@
                            <td>{{$u->name}}</td>
                            <td>
                                @if ($u->encadrant_id)
-                                   <a href="#"><button type="button" class="btn btn-success">Affecté</button></a>
+                                   <a href="#"><button type="button" class="btn btn-success">Encadrant Affecté</button></a>
                                @else
                                    <a href="{{route('goAffecter', $u->id)}}"><button type="button" class="btn btn-primary">Affecter encadrant</button></a>
                                @endif
+                                   @if ($u->sujet_id)
+                                       <a href="#"><button type="button" class="btn btn-success">Sujet Affecté</button></a>
+                                   @else
+                                       <a href="{{route('goAffecterSujet', $u->id)}}"><button type="button" class="btn btn-primary">Affecter Sujet</button></a>
+                                   @endif
                            </td>
                        </tr>
                    @endforeach

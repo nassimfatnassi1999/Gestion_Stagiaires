@@ -3,7 +3,7 @@
     Consulter Sujet
 @endsection
 @section('content')
-    <h1 class="text-center mt-2">Listes des Sujet</h1>
+    <h1 class="text-center mt-2">Listes des Sujets</h1>
     <div class="container mt-5">
         <div class="row">
             <div class="col">

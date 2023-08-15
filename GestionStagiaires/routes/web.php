@@ -68,6 +68,8 @@ Route::middleware([
             Route::post('/sujet/create','createSujet')->name('createSujet');
             Route::get('/sujet/consulter','getAllSujet')->name('getAllSujet');
             Route::get('/sujet/ajouterSujetPage','ajouterSujetPage')->name('ajouterSujetPage');
+            Route::get('/sujet/goAffecterSujet/{id}','goAffecterSujet')->name('goAffecterSujet');
+            Route::get('/gestion/AffecterSujet/{id}','AffecterSujet')->name('affecterSujet');
         });
     });
 });
