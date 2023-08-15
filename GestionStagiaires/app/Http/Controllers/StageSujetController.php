@@ -53,4 +53,30 @@ class StageSujetController extends Controller
         $stagiaire->save();
         return redirect()->route('affecterPage');
     }
+    /*
+     * function to edit sujet
+     */
+    public function editSujet($id){
+        $sujet = Sujet::find($id);
+        return view('sujet.editSujet',compact('sujet'));
+    }
+    /*
+     * function to update sujet
+     */
+    public function updateSujet(Request $request,$id){
+        $suj = Sujet::find($id);
+        $suj->update([
+            'titre'=>$request->titre,
+            'description'=>$request->description,
+        ]);
+        return redirect()->route('getAllSujet');
+    }
+    /**
+     * Remove Sujet
+     */
+    public function destroySujet($id)
+    {
+        Sujet::findOrfail($id)->delete();
+        return redirect()->route('getAllSujet');
+    }
 }

@@ -6,8 +6,12 @@
     <h1 class="text-center mt-2">Listes des Sujets</h1>
     <div class="container mt-5">
         <div class="row">
-            <div class="col">
-                @foreach($all as $al)
+            @foreach($all as $al)
+            <div class="col-3">
+                <a href="{{route('editSujet',$al->id)}}"><button class="btn btn-warning">Edit</button></a>
+            </div>
+            <div class="col-6">
+
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
@@ -22,8 +26,18 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+
             </div>
+            <div class="col-3">
+                <div class="text-end">
+                    <form action="{{route('destroySujet',$al->id)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 @endsection

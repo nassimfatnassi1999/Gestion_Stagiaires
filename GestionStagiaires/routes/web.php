@@ -66,10 +66,14 @@ Route::middleware([
         //route sujet stage controller
         Route::controller(StageSujetController::class)->group(function (){
             Route::post('/sujet/create','createSujet')->name('createSujet');
+            Route::get('/sujet/editSujet/{id}','editSujet')->name('editSujet');
+            Route::put('/sujet/updateSujet/{id}','updateSujet')->name('updateSujet');
+            Route::delete('/sujet/destroySujet/{id}','destroySujet')->name('destroySujet');
             Route::get('/sujet/consulter','getAllSujet')->name('getAllSujet');
             Route::get('/sujet/ajouterSujetPage','ajouterSujetPage')->name('ajouterSujetPage');
             Route::get('/sujet/goAffecterSujet/{id}','goAffecterSujet')->name('goAffecterSujet');
             Route::get('/gestion/AffecterSujet/{id}','AffecterSujet')->name('affecterSujet');
+
         });
     });
 });
