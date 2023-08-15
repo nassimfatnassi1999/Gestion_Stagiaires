@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AffectController;
 use App\Http\Controllers\PersoController;
+use App\Http\Controllers\StageSujetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,8 +58,16 @@ Route::middleware([
         //affectation***************************************************************************
         //route Affectation Controller
         Route::controller(AffectController::class)->group(function (){
-            Route::get('/gestion/affecter','affecterPage')->name('affecterPage');
+            Route::get('/gestion/affecterPage','affecterPage')->name('affecterPage');
             Route::get('/gestion/consulter','consulterPage')->name('consulterPage');
+            Route::get('/gestion/affecterE/{id}','goAffecter')->name('goAffecter');
+            Route::get('/gestion/affecterEncadrant/{id}','affecterEncadrant')->name('affecterEncadrant');
+        });
+        //route sujet stage controller
+        Route::controller(StageSujetController::class)->group(function (){
+            Route::post('/sujet/create','createSujet')->name('createSujet');
+            Route::get('/sujet/consulter','getAllSujet')->name('getAllSujet');
+            Route::get('/sujet/ajouterSujetPage','ajouterSujetPage')->name('ajouterSujetPage');
         });
     });
 });

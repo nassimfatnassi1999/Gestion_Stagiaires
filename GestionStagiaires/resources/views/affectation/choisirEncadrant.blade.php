@@ -1,15 +1,10 @@
 @extends('.navbar/navbar')
 @section('title')
-        Encadrants
+    Encadrants
 @endsection
 @section('content')
     <section>
         <h2 class="text-center mt-2"> listes des Encadrants:</h2>
-        <div class="text-center">
-            <a href="{{route('deleteAll')}}">
-                <button type="button" class="btn btn-danger mb-2">Delete All</button>
-            </a>
-        </div>
     </section>
     <div class="container">
         <div class="row">
@@ -23,7 +18,6 @@
                     <tr>
                         <th scope="col">#id</th>
                         <th scope="col">name</th>
-                        <th scope="col">email</th>
                         <th scope="col">titre</th>
                         <th scope="col">proc</th>
                     </tr>
@@ -33,15 +27,16 @@
                         <tr>
                             <th scope="row">{{$u->id}}</th>
                             <td>{{$u->name}}</td>
-                            <td>{{$u->email}}</td>
                             <td>{{$u->titre}}</td>
                             <td>
-                                <a href="{{route('editEncadrant',$u->id)}}"><button type="button" class="btn btn-warning">Edit</button></a>
-                                <form action="{{route('destroyEncadrant',$u->id)}}" method="POST">
-                                    @method('DELETE')
+
+                                <form action="{{ route('affecterEncadrant', ['id' => $u->id]) }}" method="GET">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger mt-3">Soft Delete</button>
+                                    <input type="hidden" name="encadrant_id" value="{{ $u->id }}">
+                                    <input type="hidden" name="stagiaire_id" value="{{ $stagiaire->id }}">
+                                    <button type="submit" class="btn btn-primary">OK</button>
                                 </form>
+
                             </td>
                         </tr>
                     @endforeach

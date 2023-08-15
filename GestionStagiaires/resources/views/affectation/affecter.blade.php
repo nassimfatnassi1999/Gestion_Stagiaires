@@ -3,40 +3,42 @@
     Affecter
 @endsection
 @section('content')
-    @foreach($stag as $s)
-        <h1>{{$s->name}}</h1>
-    @endforeach
-    @foreach($enca as $en)
-        <h1>{{$en->name}}</h1>
-    @endforeach
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scope="col">email</th>
-            <th scope="col">role</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($stag as $s)
-            <tr>
-                <th scope="row">{{$s->id}}</th>
-                <td>{{$s->name}}</td>
-                <td>{{$s->email}}</td>
-                <td>{{$s->role}}</td>
-                <td>
-                    <a href="{{route('editStagiaire',$s->id)}}"><button type="button" class="btn btn-warning">Edit</button></a>
-                    <form action="{{route('destroyStagiaire',$s->id)}}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-danger mt-3">Soft Delete</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+   <h1 class="text-center mt-2 mb-4">choisir un stagiaire</h1>
+   <div class="container">
+       <div class="row">
+           <div class="col-2">
+
+           </div>
+           <div class="col-8">
+               <table class="table table-dark table-hover">
+                   <thead>
+                   <tr>
+                       <th scope="col">id</th>
+                       <th scope="col">name</th>
+                       <th scope="col">proc</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   @foreach($stag as $u)
+                       <tr>
+                           <th scope="row">{{$u->id}}</th>
+                           <td>{{$u->name}}</td>
+                           <td>
+                               @if ($u->encadrant_id)
+                                   <a href="#"><button type="button" class="btn btn-success">Affecté</button></a>
+                               @else
+                                   <a href="{{route('goAffecter', $u->id)}}"><button type="button" class="btn btn-primary">Affecter encadrant</button></a>
+                               @endif
+                           </td>
+                       </tr>
+                   @endforeach
+                   </tbody>
+               </table>
+           </div>
+       </div>
+       <div class="col-2">
+
+       </div>
+   </div>
 @endsection
 
