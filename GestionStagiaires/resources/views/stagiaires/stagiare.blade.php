@@ -3,23 +3,14 @@
         Stagiaires
 @endsection
 @section('content')
-    <section>
-        <h2 class="text-center mt-2"> listes des Stagiaires:</h2>
-        <div class="text-center">
-            <a href="{{route('deleteAll')}}">
-                <button type="button" class="btn btn-danger mb-2">Delete All</button>
-            </a>
-        </div>
-
-    </section>
-
     <div class="container">
         <div class="row">
-           <div class="col-2">
-
+           <div class="col-4">
+               <img src="{{asset('111.png')}}" alt="office" width="100%" height="100%">
            </div>
             <div class="col-8">
-                <table class="table table-dark table-hover">
+                <h2 class="text-center mt-2"> listes des Stagiaires:</h2>
+                <table class="table table-white table-hover">
                     <thead>
                     <tr>
                         <th scope="col">id</th>
@@ -47,9 +38,11 @@
                     @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="col-2">
-
+                <div class="text-center">
+                    <a href="{{route('deleteAll')}}">
+                        <button type="button" class="btn btn-danger mb-2">Delete All</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

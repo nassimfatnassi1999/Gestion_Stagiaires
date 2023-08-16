@@ -13,7 +13,13 @@ class Stage extends Model
         'date_fin',
         'type',
     ];
-    public function sujet(){
+    public function sujet()
+    {
         return $this->hasOne(Sujet::class);
+    }
+
+    public function personnel()
+    {
+        return $this->hasMany(Personnel::class);
     }
 }

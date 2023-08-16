@@ -12,9 +12,6 @@ class Stagiaire extends Model
     /*
      * ralation extends
      */
-    public function personnel()
-    {
-        return $this->belongsTo(Personnel::class);
-    }
+
 }
 

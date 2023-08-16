@@ -13,10 +13,10 @@
             </div>
             <div class="col-8">
 
-                <table class="table table-dark table-hover">
+                <table class="table table-white table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">#id</th>
+                        <th scope="col">id</th>
                         <th scope="col">name</th>
                         <th scope="col">titre</th>
                         <th scope="col">proc</th>

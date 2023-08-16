@@ -4,13 +4,14 @@
     Affecter
 @endsection
 @section('content')
-    <h1 class="text-center mt-2 mb-4">Ajouter Sujet</h1>
+
     <div class="container">
         <div class="row">
-            <div class="col-2">
-
+            <div class="col-6">
+                <img src="{{asset('addsujet.png')}}" alt="office" width="100%" height="100%">
             </div>
-            <div class="col-8">
+            <div class="col-6">
+                <h1 class="text-center mt-2 mb-4">Ajouter Sujet</h1>
                 <form  action="{{route('createSujet')}}" method="POST">
                     @csrf
                     <div class="mb-3">

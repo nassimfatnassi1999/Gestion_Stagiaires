@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Personnel;
+use App\Models\Stage;
 use App\Models\Sujet;
 use Illuminate\Http\Request;
 
@@ -78,5 +79,37 @@ class StageSujetController extends Controller
     {
         Sujet::findOrfail($id)->delete();
         return redirect()->route('getAllSujet');
+    }
+    /*
+     * rejeter encadrant
+     */
+    public function RejeterEncadrant($id){
+        $stagiaire = Personnel::find($id);
+        if ($stagiaire->encadrant_id === null) {
+            return "Le stagiaire n'est pas affecté à un encadrant.";
+        }
+        $stagiaire->encadrant_id = null;
+        $stagiaire->save();
+        return redirect()->route('affecterPage');
+    }
+    /*
+     * rejeter sujet
+     */
+    public function RejeterSujet($id){
+        $stagiaire = Personnel::find($id);
+        if ($stagiaire->sujet_id === null) {
+            return "Le stagiaire n'est pas affecté à un sujet.";
+        }
+        $stagiaire->sujet_id = null;
+        $stagiaire->save();
+
+        return redirect()->route('affecterPage');
+    }
+    public  function test(){
+       $sujet = Sujet::find(1);
+        $stage = $sujet->stage;
+        $personnels = $sujet->personnel;
+        //te5dem djib les personnnels o djib stage
+        return   $personnels;
     }
 }

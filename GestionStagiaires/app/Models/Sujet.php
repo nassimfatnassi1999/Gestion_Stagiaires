@@ -12,7 +12,13 @@ class Sujet extends Model
       'titre',
       'description',
     ];
-    public function stage(){
+    public function stage()
+    {
         return $this->hasOne(Stage::class);
+    }
+
+    public function personnel()
+    {
+        return $this->hasMany(Personnel::class);
     }
 }

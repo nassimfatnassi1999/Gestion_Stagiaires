@@ -73,6 +73,9 @@ Route::middleware([
             Route::get('/sujet/ajouterSujetPage','ajouterSujetPage')->name('ajouterSujetPage');
             Route::get('/sujet/goAffecterSujet/{id}','goAffecterSujet')->name('goAffecterSujet');
             Route::get('/gestion/AffecterSujet/{id}','AffecterSujet')->name('affecterSujet');
+            Route::get('/gestion/RejeterEncadrant/{id}','RejeterEncadrant')->name('RejeterEncadrant');
+            Route::get('/gestion/RejeterSujet/{id}','RejeterSujet')->name('RejeterSujet');
+            Route::get('/gestion/test','test')->name('test');
 
         });
     });
