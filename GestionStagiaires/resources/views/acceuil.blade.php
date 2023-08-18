@@ -19,6 +19,7 @@
                 <p> Centre de contact : +216 71 001 800</p>
                 <p> E-mail : contact@bhbank.tn</p>
                 <p>Site : <a target="_blank" href="https://www.bh.com.tn/">www.bhbank.tn</a> </p>
+                <a href="{{route('test')}}">test_test</a>
             </div>
         </div>
     </div>

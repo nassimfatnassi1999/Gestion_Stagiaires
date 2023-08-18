@@ -80,6 +80,17 @@
 
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Stage
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{route('AffecterStage')}}">Affecter Stage</a></li>
+                        <li><a class="dropdown-item" href="{{route('getAllStages')}}">Consulter</a></li>
+                        <li><hr class="dropdown-divider"></li>
+
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{route('archive')}}">Archive</a>
                 </li>
@@ -108,7 +119,7 @@
                     <li><a href="#"><i class="bi bi-envelope text-white"></i> contact@bhbank.tn</a></li>
                     <li><a href="#"><i class="bi bi-telephone text-white"></i> (+216) 71 126 000</a></li>
                 </ul>
-                <p class="text-white text-center">2020 © BH BANK COPYRIGHT</p>
+                <p class="text-white text-center">2023 © BH BANK COPYRIGHT</p>
                 <p class="text-center">
                     <a target="_blank" href="https://www.facebook.com/BHBank"><i class="bi bi-facebook text-white"></i></a>
                     <a target="_blank" href="https://www.instagram.com/bh_bank"><i class="bi bi-instagram text-danger"></i></a>

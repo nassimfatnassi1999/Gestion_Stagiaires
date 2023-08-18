@@ -75,6 +75,14 @@ Route::middleware([
             Route::get('/gestion/AffecterSujet/{id}','AffecterSujet')->name('affecterSujet');
             Route::get('/gestion/RejeterEncadrant/{id}','RejeterEncadrant')->name('RejeterEncadrant');
             Route::get('/gestion/RejeterSujet/{id}','RejeterSujet')->name('RejeterSujet');
+
+            Route::get('/gestion/AffecterStage','AffecterStage')->name('AffecterStage');
+            Route::post('/gestion/creerStage','creerStage')->name('creerStage');
+            Route::get('/gestion/getAllStages','getAllStages')->name('getAllStages');
+            Route::get('/gestion/editStage/{id}','editStage')->name('editStage');
+            Route::put('/sujet/updateStage/{id}','updateStage')->name('updateStage');
+
+
             Route::get('/gestion/test','test')->name('test');
 
         });

@@ -27,9 +27,14 @@ class Personnel extends Model
     {
         return $this->hasMany(Stagiaire::class, 'encadrant_id');
     }
+    public function sujet()
+    {
+        return $this->belongsTo(Sujet::class);
+    }
 
     public function stage()
     {
         return $this->belongsTo(Stage::class);
     }
+
 }

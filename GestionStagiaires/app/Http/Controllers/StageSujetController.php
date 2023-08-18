@@ -105,11 +105,96 @@ class StageSujetController extends Controller
 
         return redirect()->route('affecterPage');
     }
+    /*
+     * testttttttttttttt
+     */
     public  function test(){
-       $sujet = Sujet::find(1);
-        $stage = $sujet->stage;
-        $personnels = $sujet->personnel;
-        //te5dem djib les personnnels o djib stage
-        return   $personnels;
+        $stage = Stage::find(1);
+        if ($stage) {
+            $personnels = $stage->personnels;
+            return $personnels;
+        }
+        return 'not found';
+    }
+    /*
+     * page affecter stage
+     */
+    public function AffecterStage(){
+        $stag = Personnel::all()->where('role','=','stagiaire');
+        $sujets = Sujet::all();
+        return view('stage.affecterStage',compact('stag','sujets'));
+    }
+    /*
+     * function to create stage in Data base
+     */
+    public function creerStage(Request $request)
+    {
+        $stage = Stage::create([
+            'type' => $request->type,
+            'date_debut' => $request->date_debut,
+            'date_fin' => $request->date_fin,
+            'stagiaire_id' => $request->stagiaire_id,
+            'sujet_id' => $request->sujet_id,
+        ]);
+        // Récupérer le stage_id du stage créé
+        $stageId = $stage->id;
+        // Mettre à jour le stage_id dans la table personnels
+        Personnel::where('id', $request->stagiaire_id)
+            ->update(['stage_id' => $stageId]);
+        return redirect()->route('getAllStages');
+    }
+    /*
+     * function to get all stages
+     */
+    public function getAllStages()
+    {
+        $stages = Stage::with('personnels')->get();
+        $stagePersonnels = [];
+        foreach ($stages as $stage) {
+            $personnels = $stage->personnels()->get();
+            $stagePersonnels[$stage->id] = $personnels;
+        }
+        //return $stagePersonnels;
+          return view('stage.stage', compact('stages', 'stagePersonnels'));
+    }
+    /*
+     * function to edit stage
+     */
+    public function editStage($id)
+    {
+        $stage = Stage::find($id);
+        $stag = Personnel::where('role', 'stagiaire')->get();
+        $sujets = Sujet::all();
+        return view('stage.editStage', compact('stage', 'stag', 'sujets'));
+    }
+    /*
+     * function to update stage
+     */
+    public function updateStage(Request $request, $id)
+    {
+        $stage = Stage::find($id);
+        $oldStagiaireId = $stage->stagiaire_id;
+
+        $stage->update([
+            'type' => $request->type,
+            'date_debut' => $request->date_debut,
+            'date_fin' => $request->date_fin,
+            'stagiaire_id' => $request->stagiaire_id,
+            'sujet_id' => $request->sujet_id,
+        ]);
+        // Récupérer le stage_id du stage modifié
+        $stageId = $stage->id;
+        // Révoquer le stage du précédent stagiaire
+        Personnel::where('stage_id', $stageId)
+            ->update(['stage_id' => null]);
+        // Attribuer le stage au nouveau stagiaire
+        Personnel::where('id', $request->stagiaire_id)
+            ->update(['stage_id' => $stageId]);
+        // Si le stage a été attribué à un nouveau stagiaire, remettre l'ancien stagiaire à null
+        if ($oldStagiaireId !== $request->stagiaire_id) {
+            Personnel::where('id', $oldStagiaireId)
+                ->update(['stage_id' => null]);
+        }
+        return redirect()->route('getAllStages');
     }
 }

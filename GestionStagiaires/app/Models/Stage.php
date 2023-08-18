@@ -12,14 +12,17 @@ class Stage extends Model
         'date_debut',
         'date_fin',
         'type',
+        'stagiaire_id',
+        'sujet_id',
     ];
     public function sujet()
     {
-        return $this->hasOne(Sujet::class);
+        return $this->belongsTo(Sujet::class);
     }
 
-    public function personnel()
+    public function personnels()
     {
         return $this->hasMany(Personnel::class);
     }
+
 }
