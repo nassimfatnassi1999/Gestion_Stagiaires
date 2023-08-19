@@ -9,7 +9,7 @@
                 <img src="{{asset('222.png')}}" alt="office" width="100%" height="100%">
             </div>
             <div class="col-8">
-                <h2 class="text-center mt-2 "> listes des Stage</h2>
+                <h2 class="text-center mt-2 "> listes des Stages</h2>
                 <table class="table table-white table-hover">
                     <thead>
                     <tr>
@@ -32,10 +32,10 @@
                                 <td>{{$stage->date_fin}}</td>
                                 <td>
                                     <a href="{{route('editStage',$stage->id)}}"><button type="button" class="btn btn-warning">Edit</button></a>
-                                    <form action="#" method="POST">
+                                    <form action="{{route('deleteStage',$stage->id)}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger mt-3">Soft Delete</button>
+                                        <button type="submit" class="btn btn-danger mt-3">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -43,11 +43,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-center">
-                    <a href="{{route('deleteAll')}}">
-                        <button type="button" class="btn btn-danger">Delete All</button>
-                    </a>
-                </div>
             </div>
         </div>
     </div>

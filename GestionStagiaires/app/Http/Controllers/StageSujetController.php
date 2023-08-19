@@ -197,4 +197,14 @@ class StageSujetController extends Controller
         }
         return redirect()->route('getAllStages');
     }
+    /*
+     * function to delete stage
+     */
+    public function deleteStage($id)
+    {
+        $stage = Stage::findOrFail($id);
+        $stage->personnels()->update(['stage_id' => null]);
+        $stage->delete();
+        return redirect()->route('getAllStages');
+    }
 }

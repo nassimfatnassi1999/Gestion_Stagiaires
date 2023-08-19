@@ -86,22 +86,42 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/gestion/getAllStages', [StageSujetController::class, 'getAllStages'])->name('getAllStages');
     Route::get('/gestion/editStage/{id}', [StageSujetController::class, 'editStage'])->name('editStage');
     Route::put('/sujet/updateStage/{id}', [StageSujetController::class, 'updateStage'])->name('updateStage');
-
+    Route::delete('/sujet/deleteStage/{id}', [StageSujetController::class, 'deleteStage'])->name('deleteStage');
 });
 
 //STAGIAIRE
 Route::middleware(['auth', 'stagiaire'])->prefix('stagiaire')->group(function () {
+    Route::get('/ConsulterTaches', function () {
+        return view('taches.EspaceStagiaire');
+    })->name('ConsulterTaches');
+
+    Route::get('/GestionTaches/getAllTaches',[TachesController::class,'getAllTaches'])->name('getAllTaches');
+    Route::get('/GestionTaches/tacheTerminer/{id}',[TachesController::class,'tacheTerminer'])->name('tacheTerminer');
+    Route::get('/GestionTaches/tacheNonTerminer/{id}',[TachesController::class,'tacheNonTerminer'])->name('tacheNonTerminer');
+
 
 });
+
 //ENCADRANT
-Route::middleware(['auth', 'encadrant'])->prefix('stagiaire')->group(function () {
+Route::middleware(['auth', 'encadrant'])->prefix('encadrant')->group(function () {
     Route::get('/GestionTaches', function () {
-        return view('taches.gestionTaches');
+        return view('taches.EspaceEncadrant');
     })->name('GestionTaches');
     // route controller TachesController
     Route::controller(TachesController::class)->group(function (){
         Route::get('/GestionTaches/getAllStagiaires','getAllStagiaires')->name('getAllStagiaires');
     });
+    //route tache
+    Route::get('/GestionTaches/ajouter/{id}', [TachesController::class, 'ajouterTache'])->name('ajouterTache');
+    Route::post('/GestionTaches/storeTache', [TachesController::class, 'storeTache'])->name('storeTache');
+    Route::get('/GestionTaches/getTacheDeStag/{id}', [TachesController::class, 'getTacheDeStag'])->name('getTacheDeStag');
+    Route::get('/GestionTaches/editTache/{id}', [TachesController::class, 'editTache'])->name('editTache');
+    Route::put('/GestionTaches/updateTache/{id}', [TachesController::class, 'updateTache'])->name('updateTache');
+    Route::delete('/GestionTaches/deleteTache/{id}', [TachesController::class, 'deleteTache'])->name('deleteTache');
+
+
+
+
 
 });
 

@@ -2,12 +2,11 @@
 
 <html>
 <head>
-    <title>Espace Encadrant-@yield('title')</title>
+    <title>Espace Stagiaire-@yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="{{ asset('appNassim.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
-
 
     </style>
 </head>
@@ -22,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('GestionTaches')}}">Espace Encadrant</a>
+                    <a class="nav-link active" aria-current="page" href="{{route('ConsulterTaches')}}">Espace Stagiaire</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('getAllStagiaires')}}">Listes des stagiaires</a>
+                    <a class="nav-link active" aria-current="page" href="{{route('getAllTaches')}}">Listes des Taches</a>
                 </li>
 
                 <li class="nav-item dropdown" >
