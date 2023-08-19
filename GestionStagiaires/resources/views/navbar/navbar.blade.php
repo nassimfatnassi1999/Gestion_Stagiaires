@@ -4,26 +4,10 @@
 <head>
     <title>Gestion-@yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="{{ asset('appNassim.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
-       h5{
-           color: #ef4444
-       }
-       li a {
-           text-decoration: none;
-           color: white;
-       }
-       li p{
-           color: white;
-       }
-       footer{
-           background-color: #0E2240;
-           margin-top: 10%;
-           padding-top: 2%;
-       }
-       .form-label{
-           font-weight: bold;
-       }
+
     </style>
 </head>
 <body>
@@ -44,8 +28,8 @@
                         Stagiaires
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/users/createS">Ajouter</a></li>
-                        <li><a class="dropdown-item" href="/users/indexS">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{route('createS')}}">Ajouter</a></li>
+                        <li><a class="dropdown-item" href="{{route('stagiaires')}}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>
@@ -54,8 +38,8 @@
                         Encadrants
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/users/createE">Ajouter</a></li>
-                        <li><a class="dropdown-item" href="/users/indexE">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{route('createE')}}">Ajouter</a></li>
+                        <li><a class="dropdown-item" href="{{route('encadrants')}}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>

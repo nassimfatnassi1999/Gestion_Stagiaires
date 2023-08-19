@@ -3,6 +3,7 @@
 use App\Http\Controllers\AffectController;
 use App\Http\Controllers\PersoController;
 use App\Http\Controllers\StageSujetController;
+use App\Http\Controllers\TachesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +16,93 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//for all users
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::controller(PersoController::class)->group(function (){
+    //log out
+    Route::get('/logout','logoutn')->name('logoutn');
+});
+
+
+
+
+//ADMIN
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+
+    Route::get('/GestionStagiaires', function () {
+        return view('acceuil');
+    })->name('Gestionstag');
+
+
+    // Routes pour l'archive
+    Route::get('/archive/restore/{id}', [PersoController::class, 'restore'])->name('restore');
+    Route::get('/archive', [PersoController::class, 'showSoftdeletes'])->name('archive');
+    Route::get('/users/forcedelete/{id}', [PersoController::class, 'forceDelete'])->name('forceDelete');
+    Route::get('/users/deleteAll', [PersoController::class, 'deleteAll'])->name('deleteAll');
+
+    // Routes pour les stagiaires
+    Route::get('/users/createS', [PersoController::class, 'createS'])->name('createS');
+    Route::get('/users/indexS', [PersoController::class, 'indexS'])->name('stagiaires');
+    Route::post('/users/storeS', [PersoController::class, 'storeS'])->name('storeS');
+    Route::get('/users/editS/{id}', [PersoController::class, 'editS'])->name('editStagiaire');
+    Route::put('/users/updateS/{id}', [PersoController::class, 'updateS'])->name('updateStagiaire');
+    Route::delete('/users/destroyS/{id}', [PersoController::class, 'destroyS'])->name('destroyStagiaire');
+
+    // Routes pour les encadrants
+    Route::get('/users/indexE', [PersoController::class, 'indexE'])->name('encadrants');
+    Route::post('/users/storeE', [PersoController::class, 'storeE'])->name('storeE');
+    Route::get('/users/createE', [PersoController::class, 'createE'])->name('createE');
+    Route::get('/users/editE/{id}', [PersoController::class, 'editE'])->name('editEncadrant');
+    Route::put('/users/updateE/{id}', [PersoController::class, 'updateE'])->name('updateEncadrant');
+    Route::delete('/users/destroyE/{id}', [PersoController::class, 'destroyE'])->name('destroyEncadrant');
+
+    // Routes pour les affectations
+    Route::get('/gestion/affecterPage', [AffectController::class, 'affecterPage'])->name('affecterPage');
+    Route::get('/gestion/consulter', [AffectController::class, 'consulterPage'])->name('consulterPage');
+    Route::get('/gestion/affecterE/{id}', [AffectController::class, 'goAffecter'])->name('goAffecter');
+    Route::get('/gestion/affecterEncadrant/{id}', [AffectController::class, 'affecterEncadrant'])->name('affecterEncadrant');
+
+    // Routes pour les sujets de stage
+    Route::post('/sujet/create', [StageSujetController::class, 'createSujet'])->name('createSujet');
+    Route::get('/sujet/editSujet/{id}', [StageSujetController::class, 'editSujet'])->name('editSujet');
+    Route::put('/sujet/updateSujet/{id}', [StageSujetController::class, 'updateSujet'])->name('updateSujet');
+    Route::delete('/sujet/destroySujet/{id}', [StageSujetController::class, 'destroySujet'])->name('destroySujet');
+    Route::get('/sujet/consulter', [StageSujetController::class, 'getAllSujet'])->name('getAllSujet');
+    Route::get('/sujet/ajouterSujetPage', [StageSujetController::class, 'ajouterSujetPage'])->name('ajouterSujetPage');
+    Route::get('/sujet/goAffecterSujet/{id}', [StageSujetController::class, 'goAffecterSujet'])->name('goAffecterSujet');
+    Route::get('/gestion/AffecterSujet/{id}', [StageSujetController::class, 'AffecterSujet'])->name('affecterSujet');
+    Route::get('/gestion/RejeterEncadrant/{id}', [StageSujetController::class, 'RejeterEncadrant'])->name('RejeterEncadrant');
+    Route::get('/gestion/RejeterSujet/{id}', [StageSujetController::class, 'RejeterSujet'])->name('RejeterSujet');
+
+    // Routes pour les stages
+    Route::get('/gestion/AffecterStage', [StageSujetController::class, 'AffecterStage'])->name('AffecterStage');
+    Route::post('/gestion/creerStage', [StageSujetController::class, 'creerStage'])->name('creerStage');
+    Route::get('/gestion/getAllStages', [StageSujetController::class, 'getAllStages'])->name('getAllStages');
+    Route::get('/gestion/editStage/{id}', [StageSujetController::class, 'editStage'])->name('editStage');
+    Route::put('/sujet/updateStage/{id}', [StageSujetController::class, 'updateStage'])->name('updateStage');
+
+});
+
+//STAGIAIRE
+Route::middleware(['auth', 'stagiaire'])->prefix('stagiaire')->group(function () {
+
+});
+//ENCADRANT
+Route::middleware(['auth', 'encadrant'])->prefix('stagiaire')->group(function () {
+    Route::get('/GestionTaches', function () {
+        return view('taches.gestionTaches');
+    })->name('GestionTaches');
+    // route controller TachesController
+    Route::controller(TachesController::class)->group(function (){
+        Route::get('/GestionTaches/getAllStagiaires','getAllStagiaires')->name('getAllStagiaires');
+    });
+
 });
 
 Route::middleware([
@@ -25,66 +110,5 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    //
-    Route::get('/GestionStagiaires', function () {
-        return view('acceuil');
-    })->name('Gestionstag');
-    //route PersonnelController
-    Route::controller(PersoController::class)->group(function (){
-        //log out
-        Route::get('/logout','logoutn')->name('logoutn');
-        //archive
-        Route::get('/archive/restore/{id}','restore')->name('restore');
-        Route::get('/archive','showSoftdeletes')->name('archive');
-        Route::get('/users/forcedelete/{id}','forceDelete')->name('forceDelete');
-        Route::get('/users/deleteAll','deleteAll')->name('deleteAll');
-        //stagiare********************************************************************************
-        Route::get('/users/createS','createS');
-        Route::get('/users/indexS','indexS')->name('stagiaires');
-        Route::post('/users/storeS','storeS')->name('storeS');
-        Route::get('/users/editS/{id}','editS')->name('editStagiaire');
-        Route::put('/users/updateS/{id}','updateS')->name('updateStagiaire');
-        Route::delete('/users/destroyS/{id}','destroyS')->name('destroyStagiaire');
-        //encadrant***************************************************************************
-        Route::get('/users/indexE','indexE')->name('encadrants');
-        Route::post('/users/storeE','storeE')->name('storeE');
-        Route::get('/users/createE','createE');
-        Route::get('/users/editE/{id}','editE')->name('editEncadrant');
-        Route::put('/users/updateE/{id}','updateE')->name('updateEncadrant');
-        Route::delete('/users/destroyE/{id}','destroyE')->name('destroyEncadrant');
-        //affectation***************************************************************************
-        //route Affectation Controller
-        Route::controller(AffectController::class)->group(function (){
-            Route::get('/gestion/affecterPage','affecterPage')->name('affecterPage');
-            Route::get('/gestion/consulter','consulterPage')->name('consulterPage');
-            Route::get('/gestion/affecterE/{id}','goAffecter')->name('goAffecter');
-            Route::get('/gestion/affecterEncadrant/{id}','affecterEncadrant')->name('affecterEncadrant');
-        });
-        //route sujet stage controller
-        Route::controller(StageSujetController::class)->group(function (){
-            Route::post('/sujet/create','createSujet')->name('createSujet');
-            Route::get('/sujet/editSujet/{id}','editSujet')->name('editSujet');
-            Route::put('/sujet/updateSujet/{id}','updateSujet')->name('updateSujet');
-            Route::delete('/sujet/destroySujet/{id}','destroySujet')->name('destroySujet');
-            Route::get('/sujet/consulter','getAllSujet')->name('getAllSujet');
-            Route::get('/sujet/ajouterSujetPage','ajouterSujetPage')->name('ajouterSujetPage');
-            Route::get('/sujet/goAffecterSujet/{id}','goAffecterSujet')->name('goAffecterSujet');
-            Route::get('/gestion/AffecterSujet/{id}','AffecterSujet')->name('affecterSujet');
-            Route::get('/gestion/RejeterEncadrant/{id}','RejeterEncadrant')->name('RejeterEncadrant');
-            Route::get('/gestion/RejeterSujet/{id}','RejeterSujet')->name('RejeterSujet');
 
-            Route::get('/gestion/AffecterStage','AffecterStage')->name('AffecterStage');
-            Route::post('/gestion/creerStage','creerStage')->name('creerStage');
-            Route::get('/gestion/getAllStages','getAllStages')->name('getAllStages');
-            Route::get('/gestion/editStage/{id}','editStage')->name('editStage');
-            Route::put('/sujet/updateStage/{id}','updateStage')->name('updateStage');
-
-
-            Route::get('/gestion/test','test')->name('test');
-
-        });
-    });
 });

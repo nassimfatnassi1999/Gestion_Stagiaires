@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Personnel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,16 +27,28 @@ class PersoController extends Controller
     /*
      * function to store stagiaire in data base
      */
-    public function storeS(Request $request){
-        $user =Personnel::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
+
+
+    public function storeS(Request $request)
+    {
+        // Créer un nouvel utilisateur dans la table "users" avec le rôle par défaut "admin"
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => bcrypt($request->password),
-            'telephone'=>$request->telephone,
-            'role'=>'stagiaire',
-            'universite'=>$request->universite,
-            'niveau'=>$request->niveau,
-            'duree'=>$request->duree,
+            'role' => 'stagiaire', // Rôle par défaut
+        ]);
+        // Créer un nouveau stagiaire dans la table "personnels" en utilisant l'ID de l'utilisateur créé
+        $stagiaire = Personnel::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'telephone' => $request->telephone,
+            'role' => 'stagiaire',
+            'universite' => $request->universite,
+            'niveau' => $request->niveau,
+            'duree' => $request->duree,
+            'user_id' => $user->id,
         ]);
         return redirect()->route('stagiaires');
     }
@@ -49,18 +62,33 @@ class PersoController extends Controller
     /*
      * function to update encadrant
      */
-    public function updateS(Request $request,$id){
-        $user=Personnel::findOrfail($id);
-        $user->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>bcrypt($request->password),
-            'telephone'=>$request->telephone,
-            'role'=>$request->role,
-            'universite'=>$request->universite,
-            'niveau'=>$request->niveau,
-            'duree'=>$request->duree,
+
+    public function updateS(Request $request, $id)
+    {
+        // Récupérer le stagiaire à mettre à jour
+        $stagiaire = Personnel::findOrFail($id);
+
+        // Mettre à jour les informations du stagiaire dans la table "personnels"
+        $stagiaire->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'telephone' => $request->telephone,
+            'role' => $request->role,
+            'universite' => $request->universite,
+            'niveau' => $request->niveau,
+            'duree' => $request->duree,
         ]);
+
+        // Mettre à jour les informations de l'utilisateur dans la table "users" correspondant au stagiaire
+        $user = $stagiaire->user;
+        if ($user) {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role,
+            ]);
+        }
         return redirect()->route('stagiaires');
     }
     /**
@@ -92,13 +120,22 @@ class PersoController extends Controller
      * function to store encadrant in data base
      */
     public function storeE(Request $request){
-        $user =Personnel::create([
+        // Créer un nouvel utilisateur dans la table "users"
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'encadrant', // Rôle par défaut
+        ]);
+        // Créer un nouveau encadrant dans la table "personnels" en utilisant l'ID de l'utilisateur créé
+        $encadrant =Personnel::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
             'telephone'=>$request->telephone,
             'role'=>'encadrant',
             'titre'=>$request->titre,
+            'user_id' => $user->id,
         ]);
         return redirect()->route('encadrants');
     }
@@ -113,15 +150,26 @@ class PersoController extends Controller
      * function to update encadrant
      */
     public function updateE(Request $request,$id){
-        $user=Personnel::findOrfail($id);
-        $user->update([
+        // Récupérer l'encadrant' à mettre à jour
+        $encadrant=Personnel::findOrfail($id);
+
+        // Mettre à jour les informations du lencadrant dans la table "personnels"
+        $encadrant->update([
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>bcrypt($request->password),
             'telephone'=>$request->telephone,
             'role'=>$request->role,
             'titre'=>$request->titre,
         ]);
+        // Mettre à jour les informations de l'utilisateur dans la table "users" correspondant au stagiaire
+        $user = $encadrant->user;
+        if ($user) {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role'=>$request->role,
+            ]);
+        }
         return redirect()->route('encadrants');
     }
     /**

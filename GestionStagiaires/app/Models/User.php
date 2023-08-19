@@ -28,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -59,4 +60,32 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    /*
+     * relation
+     */
+    public function personnel()
+    {
+        return $this->hasOne(Personnel::class, 'user_id');
+    }
+    /*
+     * utiliser dans le middleware is ADMIN
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+    /*
+     * utiliser dans le middleware is STAGIAIRE
+     */
+    public function isStagiaire()
+    {
+        return $this->role === 'stagiaire';
+    }
+    /*
+     * utiliser dans le middleware is ENCADRANT
+     */
+    public function isEncadrant()
+    {
+        return $this->role === 'encadrant';
+    }
 }
