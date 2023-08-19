@@ -14,30 +14,31 @@
 
 <nav class="navbar navbar-expand-lg bg-warning">
     <div class="container-fluid">
-        <img src="{{asset('BHlogo.png')}}" alt="logo bh" width="5%" height="1%">
+        <img src="{{ asset('BHlogo.png') }}" alt="logo bh" width="5%" height="1%">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('ConsulterTaches')}}">Espace Stagiaire</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('ConsulterTaches') }}">Espace Stagiaire</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('getAllTaches')}}">Listes des Taches</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('getAllTaches') }}">Listes des Taches</a>
                 </li>
-
-                <li class="nav-item dropdown" >
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('logoutn')}}">Log out</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logoutn') }}">Déconnexion</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>

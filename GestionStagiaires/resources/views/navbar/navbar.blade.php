@@ -14,22 +14,22 @@
 
 <nav class="navbar navbar-expand-lg bg-warning">
     <div class="container-fluid">
-          <img src="{{asset('BHlogo.png')}}" alt="logo bh" width="5%" height="1%">
+        <img src="{{ asset('BHlogo.png') }}" alt="logo bh" width="5%" height="1%">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('Gestionstag')}}">Acceuil</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('Gestionstag') }}">Accueil</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Stagiaires
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('createS')}}">Ajouter</a></li>
-                        <li><a class="dropdown-item" href="{{route('stagiaires')}}">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{ route('createS') }}">Ajouter</a></li>
+                        <li><a class="dropdown-item" href="{{ route('stagiaires') }}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>
@@ -38,30 +38,29 @@
                         Encadrants
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('createE')}}">Ajouter</a></li>
-                        <li><a class="dropdown-item" href="{{route('encadrants')}}">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{ route('createE') }}">Ajouter</a></li>
+                        <li><a class="dropdown-item" href="{{ route('encadrants') }}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Affectation
+                        Affectation
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('affecterPage')}}">Affecter Encadrant</a></li>
-                        <li><a class="dropdown-item" href="{{route('consulterPage')}}">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{ route('affecterPage') }}">Affecter Encadrant</a></li>
+                        <li><a class="dropdown-item" href="{{ route('consulterPage') }}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
-
                     </ul>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Sujet
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('ajouterSujetPage')}}">Ajouter Sujet</a></li>
-                        <li><a class="dropdown-item" href="{{route('getAllSujet')}}">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{ route('ajouterSujetPage') }}">Ajouter Sujet</a></li>
+                        <li><a class="dropdown-item" href="{{ route('getAllSujet') }}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
-
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -69,26 +68,27 @@
                         Stage
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('AffecterStage')}}">Affecter Stage</a></li>
-                        <li><a class="dropdown-item" href="{{route('getAllStages')}}">Consulter</a></li>
+                        <li><a class="dropdown-item" href="{{ route('AffecterStage') }}">Affecter Stage</a></li>
+                        <li><a class="dropdown-item" href="{{ route('getAllStages') }}">Consulter</a></li>
                         <li><hr class="dropdown-divider"></li>
-
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('archive')}}">Archive</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('archive') }}">Archive</a>
                 </li>
-                <li class="nav-item dropdown" >
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('logoutn')}}">Log out</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logoutn') }}">Déconnexion</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>
