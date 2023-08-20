@@ -73,6 +73,16 @@
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('RegisterNewAdmin') }}">Ajouter Admin</a></li>
+                        <li><a class="dropdown-item" href="{{route('consulterAdmin')}}">Consulter</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('archive') }}">Archive</a>
                 </li>
@@ -83,6 +93,9 @@
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('profile.show') }}">Profile</a>
+                        </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logoutn') }}">Déconnexion</a>
                         </li>

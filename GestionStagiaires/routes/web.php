@@ -39,7 +39,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         return view('acceuil');
     })->name('Gestionstag');
 
-
+    //RegisterNewAdmin
+    Route::get('/RegisterNewAdmin', [PersoController::class, 'RegisterNewAdmin'])->name('RegisterNewAdmin');
+    Route::post('/StoreNewAdmin', [PersoController::class, 'storeNewAdmin'])->name('storeAdmin');
+    Route::get('/consulterAdmin', [PersoController::class, 'consulterAdmin'])->name('consulterAdmin');
     // Routes pour l'archive
     Route::get('/archive/restore/{id}', [PersoController::class, 'restore'])->name('restore');
     Route::get('/archive', [PersoController::class, 'showSoftdeletes'])->name('archive');

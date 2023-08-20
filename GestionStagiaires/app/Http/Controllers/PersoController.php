@@ -219,5 +219,31 @@ class PersoController extends Controller
         Auth::guard('web')->logout();
         return redirect('/');
     }
-
+    /*
+        * store new admin
+        */
+    public function storeNewAdmin(Request $request){
+        // Créer un nouvel utilisateur dans la table "users" avec le rôle par défaut "admin"
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'admin', // Rôle par défaut
+        ]);
+        return redirect()->route('admin.consulterAdmin');
+    }
+    /*
+     * register new admin
+     */
+    public function registerNewAdmin(){
+        return view('admin.registerAdmin');
+    }
+    /**
+     * Fonction pour consulter tous les administrateurs
+     */
+    public function consulterAdmin()
+    {
+        $admins = User::where('role', 'admin')->get();
+        return view('admin.consulerAdmin',compact('admins'));
+    }
 }
